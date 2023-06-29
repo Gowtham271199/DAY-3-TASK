@@ -1,0 +1,88 @@
+DAY 3 TASKS:
+
+Q1.)
+
+//How to compare two JSON have the same properties without order
+//let obj1 = {name:"person1", age:5}
+//ler obj2 = {age:5 , name:"person1"}
+
+var j1 = '{"name":"Person 1", "age":5}';
+var j2 = '{"age":5,"name":"Person 2"}';
+
+function compareJSON() {
+  //1. Parse JSON string
+  var obj1 = JSON.parse(j1);
+  var obj2 = JSON.parse(j2);
+  
+  //2. Compare the no of properties
+  console.log(Object.keys(obj1).length);
+  console.log(Object.keys(obj2).length);
+  if(Object.keys(obj1).length !== Object.keys(obj2).length) {
+    return false;
+  }
+  
+  //3. Compare the actual properties(Keys)
+  for(var key in obj1) {
+    if(!obj2.hasOwnProperty(key) || obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+const result = compareJSON();
+console.log(result);
+
+
+
+Q2.) Using API URL to display all country flags in console:
+
+    
+<html>
+  <head>
+  
+  
+  
+    <title>XMLHttpRequest Example</title>
+  </head>
+  <body>
+    <script>
+    //Create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+
+      //Define HTTP method and URL
+      var method = "GET";
+      var url = "https://restcountries.com/v3.1/all";
+
+      //Open the request
+      xhr.open(method, url);
+
+      xhr.onload = function () {
+        debugger;
+        if (xhr.status === 200) {
+          //Request was successful
+          //console.log(xhr.responseText);
+          var details = JSON.parse(xhr.responseText);
+          for(var i=0;i<details.length;i++){
+            console.log(details[i].flag);
+            console.log(details[i].name);
+            console.log(details[i].regions);
+            console.log(details[i].subregion);
+            console.log(details[i].population);
+          }
+          
+        } else {
+          //Request failed
+          console.log("Request failed", xhr.status);
+        }
+      };
+
+      //send the request
+      xhr.send();
+    </script>
+  </body>
+</html>
+
+
+
+
